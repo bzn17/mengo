@@ -3,197 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phantom Portal | Content Box</title>
+    <title>Доступ к боту</title>
     <style>
-        /* Глобальные настройки в стиле Призрака (Phantom) */
         body {
             margin: 0;
             padding: 0;
-            background-color: #050505;
-            color: #e0e0e0;
-            font-family: 'Courier New', Courier, monospace;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            position: relative;
         }
 
-        /* Мрачный градиент на фоне */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
-            z-index: -1;
-        }
-
-        /* Эффект тумана/шума на фоне (опционально) */
-        body::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-            opacity: 0.03;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .container {
-            text-align: center;
-            background: rgba(15, 15, 15, 0.85);
-            padding: 50px 40px;
-            border-radius: 4px; /* Острые углы для минимализма */
-            border: 1px solid #333;
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.03);
-            max-width: 90%;
-            width: 380px;
-            position: relative;
-            z-index: 1;
-            backdrop-filter: blur(8px);
-            transition: all 0.5s ease;
-        }
-
-        .container:hover {
-            border-color: #555;
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.06);
-        }
-
-        /* Иконка призрака с анимацией парения */
-        .ghost-icon {
-            font-size: 55px;
-            margin-bottom: 10px;
-            animation: float 4s ease-in-out infinite;
-            opacity: 0.7;
-            filter: grayscale(100%);
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px) scale(1); opacity: 0.7; }
-            50% { transform: translateY(-15px) scale(1.05); opacity: 0.9; }
-            100% { transform: translateY(0px) scale(1); opacity: 0.7; }
-        }
-
-        h1 {
-            color: #ffffff;
-            margin-bottom: 15px;
-            font-size: 26px;
-            font-weight: normal;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-            text-transform: uppercase;
-        }
-
-        p {
-            color: #777777;
-            margin-bottom: 40px;
-            font-size: 13px;
-            line-height: 1.6;
-            letter-spacing: 0.5px;
-        }
-
-        /* Строгая черно-белая кнопка */
-        .magic-button {
+        .huge-button {
             background: transparent;
-            border: 1px solid #ffffff;
-            padding: 16px 30px;
+            border: 3px solid #ffffff;
             color: #ffffff;
-            font-size: 15px;
-            font-family: 'Courier New', Courier, monospace;
+            font-size: 40px;
+            font-weight: bold;
+            padding: 30px 60px;
             cursor: pointer;
-            transition: all 0.4s ease;
-            width: 100%;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            position: relative;
-            overflow: hidden;
-            outline: none;
+            transition: 0.2s;
         }
 
-        /* Анимация инверсии при наведении */
-        .magic-button:hover {
+        .huge-button:hover {
             background: #ffffff;
             color: #000000;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            transform: scale(1.02);
         }
 
-        .magic-button:active {
-            transform: scale(0.98);
-        }
-
-        .magic-button:disabled {
-            background: #111111;
-            color: #444444;
-            border-color: #444444;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
-
-        .status {
-            margin-top: 25px;
-            font-size: 12px;
+        .huge-button:disabled {
+            border-color: #555555;
             color: #555555;
-            height: 15px;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
+            cursor: not-allowed;
+            background: transparent;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="ghost-icon">👻</div>
-        <h1>Portal</h1>
-        <p>Нажмите на кнопку, чтобы призвать актуального бота. Ваш путь безопасен и полностью анонимен.</p>
-        
-        <button class="magic-button" id="btn" onclick="openRandomBot()">Войти</button>
-        
-        <div class="status" id="statusText">Ожидание...</div>
-    </div>
+    <button class="huge-button" id="btn" onclick="openBot()">ПЕРЕЙТИ К БОТУ</button>
 
     <script>
-        async function openRandomBot() {
-            const statusDiv = document.getElementById("statusText");
+        async function openBot() {
             const btn = document.getElementById("btn");
-            
-            // Визуальный отклик для пользователя
-            statusDiv.innerHTML = "Установка связи с сервером...";
-            statusDiv.style.color = "#ffffff";
+            btn.innerText = "ЗАГРУЗКА...";
             btn.disabled = true;
 
             try {
-                /* 
-                   Здесь происходит магия. Сайт обращается к скрытому серверному файлу.
-                   Никто не видит запрос и не знает список. Сервер отдает только ОДНУ ссылку.
-                */
+                // Стучимся в твой скрытый файл на сервере
                 const response = await fetch('/.netlify/functions/get_bot');
                 
-                if (!response.ok) {
-                    throw new Error('Server response was not ok');
-                }
-
+                if (!response.ok) throw new Error('Ошибка');
+                
                 const data = await response.json();
 
                 if (data.url) {
-                    statusDiv.innerHTML = "Связь установлена. Перенаправление...";
-                    statusDiv.style.color = "#888888";
-                    
-                    // Небольшая задержка для красоты эффекта
-                    setTimeout(() => {
-                        window.location.href = data.url; 
-                    }, 800);
-                } else {
-                    throw new Error('No URL returned');
+                    window.location.href = data.url; 
                 }
             } catch (error) {
-                // Если что-то пошло не так (например, ты удалил серверный файл)
-                statusDiv.innerHTML = "Ошибка связи. Врата закрыты.";
-                statusDiv.style.color = "#ff4444";
-                btn.disabled = false;
+                btn.innerText = "ОШИБКА ПОДКЛЮЧЕНИЯ";
             }
         }
     </script>
