@@ -1,15 +1,11 @@
 exports.handler = async () => {
     const rawList = `
 
-@Ghhbbjmnkkm_bot
-@aliyaviyebalbi_bot
-@sunway_596_bot
-@Papdpa_bot
-@ydfgt_bot
-@thebotfot_bot
-@Iliapoxui_bot
-@fluffy_world_bot
-@lslsjshduwowrbot
+@Spdksjj_bot
+@Dodgerys_bot
+@djsjskndjdj_bot
+@Hsjskaowiwoowo_bot
+@Jgmgskhdkgsigsig_bot
 
     `;
     /* ==================================================================== */
