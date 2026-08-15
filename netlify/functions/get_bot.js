@@ -1,8 +1,7 @@
 exports.handler = async () => {
     const rawList = `
 
-@Skibidizov1337_bot
-@kvtscifybot
+@necgi
 
     `;
     /* ==================================================================== */
