@@ -3,71 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Доступ к боту</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .huge-button {
-            background: transparent;
-            border: 3px solid #ffffff;
-            color: #ffffff;
-            font-size: 40px;
-            font-weight: bold;
-            padding: 30px 60px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: 0.2s;
-        }
-
-        .huge-button:hover {
-            background: #ffffff;
-            color: #000000;
-        }
-
-        .huge-button:disabled {
-            border-color: #555555;
-            color: #555555;
-            cursor: not-allowed;
-            background: transparent;
-        }
-    </style>
+    <title>Перенаправление...</title>
 </head>
-<body>
-
-    <button class="huge-button" id="btn" onclick="openBot()">ПЕРЕЙТИ К БОТУ</button>
+<body style="background-color: #000000; margin: 0;">
 
     <script>
-        async function openBot() {
-            const btn = document.getElementById("btn");
-            btn.innerText = "ЗАГРУЗКА...";
-            btn.disabled = true;
-
+        // Анонимная асинхронная функция, которая запускается сама сразу при загрузке
+        (async function() {
             try {
                 // Стучимся в твой скрытый файл на сервере
                 const response = await fetch('/.netlify/functions/get_bot');
                 
-                if (!response.ok) throw new Error('Ошибка');
+                if (!response.ok) throw new Error('Ошибка соединения');
                 
                 const data = await response.json();
 
                 if (data.url) {
-                    window.location.href = data.url; 
+                    // Используем replace, чтобы пустая страница не оставалась в истории браузера
+                    window.location.replace(data.url); 
                 }
             } catch (error) {
-                btn.innerText = "ОШИБКА ПОДКЛЮЧЕНИЯ";
+                console.error("Не удалось получить ссылку на бота:", error);
             }
-        }
+        })();
     </script>
 </body>
 </html>
